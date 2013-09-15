@@ -1,6 +1,37 @@
 <?php
 
 
+/**
+ * strtocamel
+ *
+ * transforms a string into a camel case with optionally 1st character as lowercase
+ *
+ * @param string $str String to be parsed
+ * @param bool $firstLower Should first character be lowercase?
+ * @return string camelCased string
+ * @todo create a helper or whatever you normally do with Nudge.
+ */
+
+function strtocamel($str, $firstLower=true){
+	$output = '';
+
+	if(is_string($str) && !empty($str)){
+		$output = preg_replace( '/(\s|-|_)+/', '', ucwords($str) );
+		if($firstLower){
+			$output[0] = strtolower($output[0]);
+		}
+	}
+
+	return $output;
+}
+
+
+
+
+
+
+
+
 
 /**
  * wrap_words_in_spans

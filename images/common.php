@@ -34,25 +34,30 @@
 
 
 
+	/**
+	 * inlineSVG
+	 *
+	 * loads external SVG and inlines it in HTML
+	 *
+	 * @param bool $absolute Is $path server root absolute (true) or website root only (false)
+	 * @param string $path Path to the SVG
+	 * @return mixed SVG string or false
+	 */
 
-/**
- * inlineSVG
- * loads external SVG and inlines it in HTML
- *
- * @param string $path Path to the SVG
- * @return mixed SVG string or false
- */
+	function inlineSVG($path, $absolute=false){
+		$svg = '';
 
-function inlineSVG($path){
-	$svg = false;
+		if(!$absolute){
+			$path = $_SERVER['DOCUMENT_ROOT'].$path;
+		}
 
-	if(file_exists($path)){
+		if(file_exists($path)){
+			$doc = new DOMDocument();
+			$doc->load($path);
+			$svg = (string) $doc->saveXML();
+			$svg = preg_replace('(<\?xml.*?\?>)', '', $svg);
+		}
 
-		$doc = new DOMDocument();
-		$doc->load($path);
-		$svg = (string) $doc->saveXML();
-		$svg = preg_replace('(<\?xml.*?\?>)', '', $svg);
+		return $svg;
 	}
 
-	return $svg;
-}
