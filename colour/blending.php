@@ -5,6 +5,7 @@
 	 * getOrangeImg
 	 * creates an image with colour multiply blending mode. Can be cropped.
 	 *
+	 * @uses Imagick
 	 * @param string $srcURL Full PATH from the docroot (no domain)
 	 * @param string $colour hex value of a colour to be used for blending
 	 * @param int $width destination width
